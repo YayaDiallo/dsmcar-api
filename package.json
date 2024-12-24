@@ -1,5 +1,13 @@
 {
   "name": "dsmcar-drizzle",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon",
+    "lint": "eslint"
+  },
   "packageManager": "yarn@4.5.3",
   "devDependencies": {
     "@eslint/js": "^9.17.0",
