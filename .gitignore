@@ -11,3 +11,10 @@
 
 #!.yarn/cache
 .pnp.*
+
+#/* Transpiled */
+dist
+
+#/* Secrets */
+.env
+.env.*
