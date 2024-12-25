@@ -6,7 +6,13 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "nodemon",
-    "lint": "eslint"
+    "lint": "eslint",
+    "docker:build": "docker-compose -p dsmcar-api up -d --build",
+    "docker:up": "docker-compose -p dsmcar-api up -d",
+    "docker:logs": "docker-compose -p dsmcar-api logs -f --tail 10 --no-log-prefix backend",
+    "docker:dev": "yarn docker:up && yarn docker:logs",
+    "docker:stop": "docker-compose -p dsmcar-api stop",
+    "docker:exec": "docker exec -it dsmcar-api sh"
   },
   "packageManager": "yarn@4.5.3",
   "devDependencies": {
