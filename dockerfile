@@ -1,4 +1,4 @@
-FROM node:22-alpine3.19
+FROM node:22-alpine3.20
 # To set the working directory
 # @see https://stackoverflow.com/questions/55624168/how-do-i-setup-dockerfile-to-run-babel-after-install
 WORKDIR /usr/src/app/api
