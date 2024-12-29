@@ -3,5 +3,5 @@
     "src"
   ],
   "ext": "ts",
-  "exec": "yarn node --loader ts-node/esm --loader ./.pnp.loader.mjs ./src/index.ts"
+  "exec": "yarn node --loader ts-node/esm --loader ./.pnp.loader.mjs --loader ./.pnp-ts.loader.mjs ./src/index.ts"
 }
