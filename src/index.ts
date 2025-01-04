@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
-import 'dotenv/config';
+import env from './env.js';
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = env.PORT;
 
 app.get('/', (request: Request, response: Response) => {
   response.json({ message: 'Welcome to dsmcar API', version: '1.0.0' });
