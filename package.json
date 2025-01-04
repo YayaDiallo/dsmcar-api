@@ -1,5 +1,5 @@
 {
-  "name": "dsmcar-drizzle",
+  "name": "dsmcar-api",
   "type": "module",
   "main": "index.js",
   "scripts": {
