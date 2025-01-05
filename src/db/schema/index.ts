@@ -1,6 +1,6 @@
-export { userModel } from './user.schema.js';
-export { categoryModel } from './category.schema.js';
-export { carModel } from './car.schema.js';
-export { revenueModel } from './revenue.schema.js';
-export { expenseModel } from './expense.schema.js';
-export { activityModel } from './activity.schema.js';
+export { usersTable } from './user.schema.js';
+export { categoriesTable } from './category.schema.js';
+export { carsTable } from './car.schema.js';
+export { revenuesTable } from './revenue.schema.js';
+export { expensesTable } from './expense.schema.js';
+export { activitiesTable } from './activity.schema.js';

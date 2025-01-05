@@ -5,11 +5,11 @@ import {
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
-import { userModel } from './user.schema.js';
+import { usersTable } from './user.schema.js';
 
-export const activityModel = pgTable('activities', {
+export const activitiesTable = pgTable('activities', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  userId: integer().references(() => userModel.id),
+  userId: integer().references(() => usersTable.id),
   companyName: varchar({ length: 255 }).notNull(),
   description: text().notNull(),
   createdAt: timestamp({ mode: 'string' }).notNull().defaultNow(),

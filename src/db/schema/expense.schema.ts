@@ -6,13 +6,13 @@ import {
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
-import { categoryModel } from './category.schema.js';
-import { activityModel } from './activity.schema.js';
+import { categoriesTable } from './category.schema.js';
+import { activitiesTable } from './activity.schema.js';
 
-export const expenseModel = pgTable('expenses', {
+export const expensesTable = pgTable('expenses', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  activityId: integer().references(() => activityModel.id),
-  categoryId: integer().references(() => categoryModel.id),
+  activityId: integer().references(() => activitiesTable.id),
+  categoryId: integer().references(() => categoriesTable.id),
   type: varchar({ length: 255 }).notNull(),
   amount: numeric({ precision: 12, scale: 2 }).notNull(),
   date: date({ mode: 'string' }).notNull(),
