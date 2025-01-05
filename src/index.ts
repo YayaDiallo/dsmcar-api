@@ -1,13 +1,16 @@
-import express, { Request, Response } from 'express';
+import { Server } from './server.js';
 import env from './env.js';
 
-const app = express();
 const PORT = env.PORT;
 
-app.get('/', (request: Request, response: Response) => {
-  response.json({ message: 'Welcome to dsmcar API', version: '1.0.0' });
-});
+const app = new Server();
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+const startApp = async (): Promise<void> => {
+  try {
+    app.start(PORT);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+startApp();
