@@ -1,15 +1,11 @@
-import {
-  date,
-  integer,
-  pgTable,
-  timestamp,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { uuid, date, pgTable, timestamp, varchar } from 'drizzle-orm/pg-core';
 import { activitiesTable } from './activity.schema.js';
 
 export const carsTable = pgTable('cars', {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  activityId: integer().references(() => activitiesTable.id),
+  id: uuid().notNull().primaryKey().defaultRandom(),
+  activityId: uuid()
+    .references(() => activitiesTable.id)
+    .notNull(),
   brand: varchar({ length: 255 }).notNull(),
   model: varchar({ length: 255 }).notNull(),
   plate: varchar({ length: 255 }).notNull(),

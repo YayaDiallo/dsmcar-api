@@ -1,6 +1,6 @@
 import {
+  uuid,
   date,
-  integer,
   numeric,
   pgTable,
   timestamp,
@@ -10,9 +10,13 @@ import { categoriesTable } from './category.schema.js';
 import { activitiesTable } from './activity.schema.js';
 
 export const expensesTable = pgTable('expenses', {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  activityId: integer().references(() => activitiesTable.id),
-  categoryId: integer().references(() => categoriesTable.id),
+  id: uuid().notNull().primaryKey().defaultRandom(),
+  activityId: uuid()
+    .references(() => activitiesTable.id)
+    .notNull(),
+  categoryId: uuid()
+    .references(() => categoriesTable.id)
+    .notNull(),
   type: varchar({ length: 255 }).notNull(),
   amount: numeric({ precision: 12, scale: 2 }).notNull(),
   date: date({ mode: 'string' }).notNull(),

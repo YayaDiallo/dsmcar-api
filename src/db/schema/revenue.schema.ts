@@ -1,5 +1,5 @@
 import {
-  integer,
+  uuid,
   numeric,
   pgTable,
   timestamp,
@@ -8,8 +8,10 @@ import {
 import { activitiesTable } from './activity.schema.js';
 
 export const revenuesTable = pgTable('revenues', {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  activityId: integer().references(() => activitiesTable.id),
+  id: uuid().notNull().primaryKey().defaultRandom(),
+  activityId: uuid()
+    .references(() => activitiesTable.id)
+    .notNull(),
   type: varchar({ length: 255 }).notNull(),
   amount: numeric({ precision: 12, scale: 2 }).notNull(),
   createdAt: timestamp({ mode: 'string' }).notNull().defaultNow(),

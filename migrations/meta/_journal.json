@@ -5,8 +5,15 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1736013739898,
+      "when": 1737933527105,
       "tag": "0000_init",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1737934326848,
+      "tag": "0001_make-fk-not-null",
       "breakpoints": true
     }
   ]

@@ -1,6 +1,6 @@
 {
-  "id": "19f0cd73-9ba7-4620-90e7-a36f61d960c4",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "87cbfd55-c0de-4820-80b3-c59643771c10",
+  "prevId": "19f0cd73-9ba7-4620-90e7-a36f61d960c4",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -19,7 +19,7 @@
           "name": "userId",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "companyName": {
           "name": "companyName",
@@ -85,7 +85,7 @@
           "name": "activityId",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "brand": {
           "name": "brand",
@@ -203,13 +203,13 @@
           "name": "activityId",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "categoryId": {
           "name": "categoryId",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "type": {
           "name": "type",
@@ -294,7 +294,7 @@
           "name": "activityId",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "type": {
           "name": "type",
