@@ -1,8 +1,8 @@
-import express from 'express';
-import { aboutRouter } from './routes/index.js';
+import express, { Application } from 'express';
+import { aboutRouter, userRouter } from './routes/index.js';
 
 export class Server {
-  app: express.Application;
+  app: Application;
 
   constructor() {
     this.app = express();
@@ -15,7 +15,8 @@ export class Server {
   }
 
   private initializeRoutes(): void {
-    this.app.use('/', aboutRouter);
+    this.app.use('/api', aboutRouter);
+    this.app.use('/api/users', userRouter);
   }
   start(port: number): void {
     this.app.listen(port, () => {
