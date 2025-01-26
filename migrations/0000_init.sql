@@ -1,7 +1,7 @@
 CREATE TYPE "public"."role" AS ENUM('admin', 'owner');--> statement-breakpoint
 CREATE TABLE "activities" (
-	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "activities_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
-	"userId" integer,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"userId" uuid,
 	"companyName" varchar(255) NOT NULL,
 	"description" text NOT NULL,
 	"createdAt" timestamp DEFAULT now() NOT NULL,
@@ -9,8 +9,8 @@ CREATE TABLE "activities" (
 );
 --> statement-breakpoint
 CREATE TABLE "cars" (
-	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "cars_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
-	"activityId" integer,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"activityId" uuid,
 	"brand" varchar(255) NOT NULL,
 	"model" varchar(255) NOT NULL,
 	"plate" varchar(255) NOT NULL,
@@ -20,16 +20,16 @@ CREATE TABLE "cars" (
 );
 --> statement-breakpoint
 CREATE TABLE "categories" (
-	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "categories_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"name" varchar(255) NOT NULL,
 	"createdAt" timestamp DEFAULT now() NOT NULL,
 	"updatedAt" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "expenses" (
-	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "expenses_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
-	"activityId" integer,
-	"categoryId" integer,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"activityId" uuid,
+	"categoryId" uuid,
 	"type" varchar(255) NOT NULL,
 	"amount" numeric(12, 2) NOT NULL,
 	"date" date NOT NULL,
@@ -38,8 +38,8 @@ CREATE TABLE "expenses" (
 );
 --> statement-breakpoint
 CREATE TABLE "revenues" (
-	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "revenues_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
-	"activityId" integer,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"activityId" uuid,
 	"type" varchar(255) NOT NULL,
 	"amount" numeric(12, 2) NOT NULL,
 	"createdAt" timestamp DEFAULT now() NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE "revenues" (
 );
 --> statement-breakpoint
 CREATE TABLE "users" (
-	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "users_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"firstName" varchar(255) NOT NULL,
 	"lastName" varchar(255) NOT NULL,
 	"email" varchar(255) NOT NULL,
