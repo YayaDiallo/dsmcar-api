@@ -1,5 +1,6 @@
-import express, { Application } from 'express';
+import express, { Application, ErrorRequestHandler } from 'express';
 import { aboutRouter, userRouter } from './routes/index.js';
+import { errorHandler } from './middlewares/errorHandler.js';
 
 export class Server {
   app: Application;
@@ -8,6 +9,7 @@ export class Server {
     this.app = express();
     this.initializeMiddlewares();
     this.initializeRoutes();
+    this.app.use(errorHandler as ErrorRequestHandler);
   }
 
   private initializeMiddlewares(): void {
@@ -18,6 +20,7 @@ export class Server {
     this.app.use('/api', aboutRouter);
     this.app.use('/api/users', userRouter);
   }
+
   start(port: number): void {
     this.app.listen(port, () => {
       console.log(`Server is running on http://localhost:${port}`);
