@@ -24,8 +24,8 @@ class UserController {
     if (!id) {
       response.status(400).json({ message: 'Missing user ID' });
     } else {
-      const user = await this.userService.getById(id);
-      if (!user.length) {
+      const [user] = await this.userService.getById(id);
+      if (!user) {
         throw new NotFound({
           message: `User not found with id: \`${id}\``,
           statusCode: 404,
