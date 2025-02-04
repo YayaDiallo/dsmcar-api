@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { userService } from '../services/index.js';
+import { NotFound } from '../errors/index.js';
 
 class UserController {
   private userService: typeof userService;
@@ -23,8 +24,15 @@ class UserController {
     if (!id) {
       response.status(400).json({ message: 'Missing user ID' });
     } else {
-      const users = await this.userService.getById(id);
-      response.json(users);
+      const user = await this.userService.getById(id);
+      if (!user.length) {
+        throw new NotFound({
+          message: `User not found with id: \`${id}\``,
+          statusCode: 404,
+          code: 'ERR_NOT_FOUND',
+        });
+      }
+      response.json(user);
     }
   }
 
