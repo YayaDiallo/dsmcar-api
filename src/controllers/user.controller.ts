@@ -1,6 +1,10 @@
 import { Request, Response } from 'express';
 import { userService } from '../services/index.js';
 import { NotFound } from '../errors/index.js';
+import {
+  userInsertSchema,
+  userUpdateSchema,
+} from '../db/schema/user.schema.js';
 
 class UserController {
   private userService: typeof userService;
@@ -15,6 +19,7 @@ class UserController {
   }
 
   async create(request: Request, response: Response) {
+    userInsertSchema.parse(request.body);
     const [user] = await this.userService.create(request.body);
     response
       .status(201)
@@ -46,6 +51,7 @@ class UserController {
 
   async update(request: Request, response: Response) {
     const { id } = request.params;
+    userUpdateSchema.parse(request.body);
     if (!id) {
       response.status(400).json({ message: 'Missing user ID' });
     } else {
