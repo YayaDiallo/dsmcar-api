@@ -14,6 +14,14 @@ class UserController {
     this.delete = this.delete.bind(this);
   }
 
+  async create(request: Request, response: Response) {
+    const [user] = await this.userService.create(request.body);
+    response
+      .status(201)
+      .location(`http://localhost:8080/api/users/${user.id}`)
+      .send();
+  }
+
   async getAll(request: Request, response: Response) {
     const users = await this.userService.getAll();
     response.json(users);
@@ -34,14 +42,6 @@ class UserController {
       }
       response.json(user);
     }
-  }
-
-  async create(request: Request, response: Response) {
-    const [user] = await this.userService.create(request.body);
-    response
-      .status(201)
-      .location(`http://localhost:8080/api/users/${user.id}`)
-      .send();
   }
 
   async update(request: Request, response: Response) {

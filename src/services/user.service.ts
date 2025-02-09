@@ -12,18 +12,17 @@ interface User {
 }
 
 class UserService {
+  async create(userData: typeof usersTable.$inferInsert): Promise<any> {
+    const user = await db.insert(usersTable).values(userData).returning();
+
+    return user;
+  }
   async getAll(): Promise<User[]> {
     return db.select().from(usersTable);
   }
 
   async getById(id: string): Promise<User[]> {
     return db.select().from(usersTable).where(eq(usersTable.id, id));
-  }
-
-  async create(userData: typeof usersTable.$inferInsert): Promise<any> {
-    const user = await db.insert(usersTable).values(userData).returning();
-
-    return user;
   }
 
   async update(
