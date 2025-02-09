@@ -1,6 +1,13 @@
 import 'dotenv/config';
 import { ZodError, z } from 'zod';
 
+const stringBoolean = z.coerce
+  .string()
+  .transform((val) => {
+    return val === 'true';
+  })
+  .default('false');
+
 const EnvSchema = z.object({
   NODE_ENV: z.string().default('development'),
   DOCKER_CMD: z.string(),
@@ -11,7 +18,7 @@ const EnvSchema = z.object({
   DB_NAME: z.string(),
   DB_PORT: z.coerce.number(),
   DATABASE_URL: z.string(),
-  DEBUG_MODE: z.boolean().default(false),
+  DEBUG_MODE: stringBoolean,
 });
 
 export type EnvSchema = z.infer<typeof EnvSchema>;
