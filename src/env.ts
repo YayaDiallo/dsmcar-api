@@ -11,6 +11,7 @@ const EnvSchema = z.object({
   DB_NAME: z.string(),
   DB_PORT: z.coerce.number(),
   DATABASE_URL: z.string(),
+  DEBUG_MODE: z.boolean().default(false),
 });
 
 export type EnvSchema = z.infer<typeof EnvSchema>;

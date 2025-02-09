@@ -1,13 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
 import { getErrorMessage } from '../utils/index.js';
 import { CustomError } from '../errors/customError.js';
+import env from '../env.js';
+
 export const errorHandler = (
   error: unknown,
   request: Request,
   response: Response,
   next: NextFunction,
 ) => {
-  if (response.headersSent) {
+  if (response.headersSent || env.DEBUG_MODE) {
     next(error);
     return;
   }
