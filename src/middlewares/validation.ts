@@ -23,8 +23,10 @@ export function validateRequest(validators: RequestValidators) {
       next();
     } catch (error) {
       if (error instanceof ZodError) {
-        const field = error.issues[0]?.path[0];
-        const message = `${field}: ${error.issues[0]?.message}`;
+        const field = !error.issues[0]?.path[0]
+          ? ''
+          : `${error.issues[0]?.path[0]}: `;
+        const message = `${field}${error.issues[0]?.message}`;
         throw new BadRequest({
           message: message,
           statusCode: 400,
