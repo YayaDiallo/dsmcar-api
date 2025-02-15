@@ -1,1 +1,1 @@
-type ErrorCode = 'ERR_NOT_FOUND' | 'ERR_VALID';
+type ErrorCode = 'ERR_NOT_FOUND' | 'ERR_VALIDATION';
