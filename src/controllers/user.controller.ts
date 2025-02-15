@@ -5,9 +5,11 @@ import { ParamsWithId } from '../interfaces/ParamsWithId.js';
 
 class UserController {
   private userService: typeof userService;
+  private path: string;
 
   constructor() {
     this.userService = userService;
+    this.path = '/users';
     this.getAll = this.getAll.bind(this);
     this.getById = this.getById.bind(this);
     this.create = this.create.bind(this);
@@ -17,10 +19,7 @@ class UserController {
 
   async create(request: Request, response: Response) {
     const [user] = await this.userService.create(request.body);
-    response
-      .status(201)
-      .location(`http://localhost:8080/api/users/${user.id}`)
-      .send();
+    response.status(201).location(`${this.path}/${user.id}`).send();
   }
 
   async getAll(request: Request, response: Response) {
