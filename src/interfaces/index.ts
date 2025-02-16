@@ -1,1 +1,1 @@
-export { ParamsWithId } from './ParamsWithId.js';
+export { ParamsWithId } from '@/interfaces/ParamsWithId.js';

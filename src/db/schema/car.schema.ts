@@ -1,5 +1,5 @@
-import { uuid, date, pgTable, timestamp, varchar } from 'drizzle-orm/pg-core';
-import { activitiesTable } from './activity.schema.js';
+import { activitiesTable } from '@/db/schema/activity.schema.js';
+import { date, pgTable, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
 
 export const carsTable = pgTable('cars', {
   id: uuid().notNull().primaryKey().defaultRandom(),

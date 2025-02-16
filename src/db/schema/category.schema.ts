@@ -1,4 +1,4 @@
-import { uuid, pgTable, timestamp, varchar } from 'drizzle-orm/pg-core';
+import { pgTable, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
 
 export const categoriesTable = pgTable('categories', {
   id: uuid().notNull().primaryKey().defaultRandom(),

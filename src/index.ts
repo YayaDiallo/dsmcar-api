@@ -1,5 +1,5 @@
-import { Server } from './server.js';
-import env from './env.js';
+import env from '@/env.js';
+import { Server } from '@/server.js';
 
 const PORT = env.PORT;
 

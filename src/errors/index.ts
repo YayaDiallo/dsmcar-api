@@ -1,2 +1,2 @@
-export { NotFound } from './notFound.js';
-export { BadRequest } from './badRequest.js';
+export { NotFound } from '@/errors/notFound.js';
+export { BadRequest } from '@/errors/badRequest.js';

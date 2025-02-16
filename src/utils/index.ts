@@ -1,1 +1,1 @@
-export { getErrorMessage } from './processError.js';
+export { getErrorMessage } from '@/utils/processError.js';

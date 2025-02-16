@@ -1,2 +1,2 @@
-export { aboutRouter } from './about.route.js';
-export { userRouter } from './user.route.js';
+export { aboutRouter } from '@/routes/about.route.js';
+export { userRouter } from '@/routes/user.route.js';

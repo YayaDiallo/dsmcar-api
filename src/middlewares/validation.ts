@@ -1,6 +1,6 @@
+import { BadRequest } from '@/errors/index.js';
 import { NextFunction, Request, Response } from 'express';
 import { AnyZodObject, ZodError } from 'zod';
-import { BadRequest } from '../errors/index.js';
 
 interface RequestValidators {
   params?: AnyZodObject;

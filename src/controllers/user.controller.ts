@@ -1,7 +1,7 @@
+import { NotFound } from '@/errors/index.js';
+import { ParamsWithId } from '@/interfaces/index.js';
+import { userService } from '@/services/index.js';
 import { Request, Response } from 'express';
-import { userService } from '../services/index.js';
-import { NotFound } from '../errors/index.js';
-import { ParamsWithId } from '../interfaces/ParamsWithId.js';
 
 class UserController {
   private userService: typeof userService;

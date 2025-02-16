@@ -1,11 +1,11 @@
+import { activitiesTable } from '@/db/schema/index.js';
 import {
-  uuid,
   numeric,
   pgTable,
   timestamp,
+  uuid,
   varchar,
 } from 'drizzle-orm/pg-core';
-import { activitiesTable } from './activity.schema.js';
 
 export const revenuesTable = pgTable('revenues', {
   id: uuid().notNull().primaryKey().defaultRandom(),

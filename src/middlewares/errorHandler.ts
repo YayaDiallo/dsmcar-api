@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
-import { getErrorMessage } from '../utils/index.js';
-import { CustomError } from '../errors/customError.js';
-import env from '../env.js';
+import env from '@/env.js';
+import { CustomError } from '@/errors/customError.js';
+import { getErrorMessage } from '@/utils/index.js';
+import { NextFunction, Request, Response } from 'express';
 
 export const errorHandler = (
   error: unknown,

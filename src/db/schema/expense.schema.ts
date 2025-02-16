@@ -1,13 +1,13 @@
+import { activitiesTable } from '@/db/schema/activity.schema.js';
+import { categoriesTable } from '@/db/schema/category.schema.js';
 import {
-  uuid,
   date,
   numeric,
   pgTable,
   timestamp,
+  uuid,
   varchar,
 } from 'drizzle-orm/pg-core';
-import { categoriesTable } from './category.schema.js';
-import { activitiesTable } from './activity.schema.js';
 
 export const expensesTable = pgTable('expenses', {
   id: uuid().notNull().primaryKey().defaultRandom(),

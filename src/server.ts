@@ -1,6 +1,6 @@
+import { errorHandler } from '@/middlewares/index.js';
+import { aboutRouter, userRouter } from '@/routes/index.js';
 import express, { Application, ErrorRequestHandler } from 'express';
-import { aboutRouter, userRouter } from './routes/index.js';
-import { errorHandler } from './middlewares/errorHandler.js';
 
 export class Server {
   app: Application;

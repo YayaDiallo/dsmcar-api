@@ -1,1 +1,1 @@
-export { userController } from './user.controller.js';
+export { userController } from '@/controllers/user.controller.js';

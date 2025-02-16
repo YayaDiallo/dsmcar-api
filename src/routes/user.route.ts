@@ -1,11 +1,8 @@
+import { userController } from '@/controllers/index.js';
+import { userInsertSchema, userUpdateSchema } from '@/db/schema/user.schema.js';
+import { ParamsWithId } from '@/interfaces/index.js';
+import { validateRequest } from '@/middlewares/index.js';
 import express from 'express';
-import { userController } from '../controllers/index.js';
-import { validateRequest } from '../middlewares/index.js';
-import { ParamsWithId } from '../interfaces/ParamsWithId.js';
-import {
-  userInsertSchema,
-  userUpdateSchema,
-} from '../db/schema/user.schema.js';
 
 export const userRouter = express.Router();
 
