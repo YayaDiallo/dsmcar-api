@@ -19,7 +19,7 @@ class UserController {
 
   async create(request: Request, response: Response) {
     const [user] = await this.userService.create(request.body);
-    response.status(201).location(`${this.path}/${user.id}`).send();
+    response.status(201).location(`${this.path}/${user?.id}`).send();
   }
 
   async getAll(request: Request, response: Response) {
