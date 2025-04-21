@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { db } from '@/db/index.js';
-import { usersTable } from '@/db/schema/user.schema.js';
+import { UserSelectSchema, usersTable } from '@/db/schema/user.schema.js';
 import { eq } from 'drizzle-orm';
 
 interface User {
@@ -12,9 +12,10 @@ interface User {
 }
 
 class UserService {
-  async create(userData: typeof usersTable.$inferInsert): Promise<any> {
+  async create(
+    userData: typeof usersTable.$inferInsert,
+  ): Promise<UserSelectSchema[]> {
     const user = await db.insert(usersTable).values(userData).returning();
-
     return user;
   }
   async getAll(): Promise<User[]> {

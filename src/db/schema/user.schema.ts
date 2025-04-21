@@ -1,5 +1,10 @@
 import { pgEnum, pgTable, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
-import { createInsertSchema, createUpdateSchema } from 'drizzle-zod';
+import {
+  createInsertSchema,
+  createSelectSchema,
+  createUpdateSchema,
+} from 'drizzle-zod';
+import { z } from 'zod';
 
 export const roleEnum = pgEnum('role', ['admin', 'owner']);
 
@@ -14,6 +19,9 @@ export const usersTable = pgTable('users', {
   updatedAt: timestamp({ mode: 'string' }).notNull().defaultNow(),
 });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const userSelectSchema = createSelectSchema(usersTable);
+
 export const userInsertSchema = createInsertSchema(usersTable, {
   email: (schema) => schema.email(),
   password: (schema) => schema.min(6),
@@ -22,3 +30,5 @@ export const userUpdateSchema = createUpdateSchema(usersTable, {
   email: (schema) => schema.email(),
   password: (schema) => schema.min(6),
 }).strict();
+
+export type UserSelectSchema = z.infer<typeof userSelectSchema>;
