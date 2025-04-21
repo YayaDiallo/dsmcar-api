@@ -29,7 +29,7 @@ class UserService {
   async update(
     id: string,
     userData: typeof usersTable.$inferInsert,
-  ): Promise<any> {
+  ): Promise<{ id: string }[]> {
     const user = await db
       .update(usersTable)
       .set({ ...userData })
