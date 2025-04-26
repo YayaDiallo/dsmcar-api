@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { db } from '@/db/index.js';
 import { UserSelectSchema, usersTable } from '@/db/schema/user.schema.js';
 import { eq } from 'drizzle-orm';
@@ -39,7 +38,7 @@ class UserService {
     return user;
   }
 
-  async delete(id: string): Promise<any> {
+  async delete(id: string): Promise<void> {
     await db.delete(usersTable).where(eq(usersTable.id, id));
   }
 }
