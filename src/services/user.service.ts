@@ -2,14 +2,6 @@ import { db } from '@/db/index.js';
 import { UserSelectSchema, usersTable } from '@/db/schema/user.schema.js';
 import { eq } from 'drizzle-orm';
 
-interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  role: string;
-}
-
 class UserService {
   async create(
     userData: typeof usersTable.$inferInsert,
@@ -17,11 +9,11 @@ class UserService {
     const user = await db.insert(usersTable).values(userData).returning();
     return user;
   }
-  async getAll(): Promise<User[]> {
+  async getAll(): Promise<UserSelectSchema[]> {
     return db.select().from(usersTable);
   }
 
-  async getById(id: string): Promise<User[]> {
+  async getById(id: string): Promise<UserSelectSchema[]> {
     return db.select().from(usersTable).where(eq(usersTable.id, id));
   }
 
