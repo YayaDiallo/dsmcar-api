@@ -8,6 +8,12 @@ import {
   uuid,
   varchar,
 } from 'drizzle-orm/pg-core';
+import {
+  createInsertSchema,
+  createSelectSchema,
+  createUpdateSchema,
+} from 'drizzle-zod';
+import { z } from 'zod';
 
 export const expensesTable = pgTable('expenses', {
   id: uuid().notNull().primaryKey().defaultRandom(),
@@ -23,3 +29,9 @@ export const expensesTable = pgTable('expenses', {
   createdAt: timestamp({ mode: 'string' }).notNull().defaultNow(),
   updatedAt: timestamp({ mode: 'string' }).notNull().defaultNow(),
 });
+
+export const expenseSelectSchema = createSelectSchema(expensesTable);
+export const expenseInsertSchema = createInsertSchema(expensesTable);
+export const expenseUpdateSchema = createUpdateSchema(expensesTable);
+
+export type ExpenseSelectSchema = z.infer<typeof expenseSelectSchema>;
