@@ -47,4 +47,5 @@ class UserService {
     await db.delete(usersTable).where(eq(usersTable.id, id));
   }
 }
+
 export const userService = new UserService();

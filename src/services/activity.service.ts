@@ -1,6 +1,5 @@
-import { db } from '@/db/index.js';
 import {
-  ActivitySelectSchema,
+  activitySelectSchema,
   activitiesTable,
 } from '@/db/schema/activity.schema.js';
 import { GetCollectionResponse } from '@/services/service.helper.js';
