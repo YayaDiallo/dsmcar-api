@@ -10,7 +10,7 @@ class UserController {
   constructor() {
     this.userService = userService;
     this.path = '/users';
-    this.getAll = this.getAll.bind(this);
+    this.getCollection = this.getCollection.bind(this);
     this.getById = this.getById.bind(this);
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
@@ -22,8 +22,8 @@ class UserController {
     response.status(201).location(`${this.path}/${user?.id}`).send();
   }
 
-  async getAll(request: Request, response: Response) {
-    const users = await this.userService.getAll();
+  async getCollection(request: Request, response: Response) {
+    const users = await this.userService.getCollection();
     response.json(users);
   }
   async getById(request: Request<ParamsWithId>, response: Response) {

@@ -6,7 +6,7 @@ import express from 'express';
 
 export const userRouter = express.Router();
 
-userRouter.get('/', userController.getAll);
+userRouter.get('/', userController.getCollection);
 userRouter.get(
   '/:id',
   validateRequest({ params: ParamsWithId }),
