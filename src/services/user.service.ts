@@ -14,8 +14,16 @@ class UserService {
     const user = await db.insert(usersTable).values(userData).returning();
     return user;
   }
-  async getAll(): Promise<UserSelectSchema[]> {
-    return db.select().from(usersTable);
+  async getCollection(): Promise<GetCollectionResponse<UserSelectSchema>> {
+    const [rows, countResult] = await Promise.all([
+      db.select().from(usersTable),
+      db.select({ totalCount: count(usersTable.id) }).from(usersTable),
+    ]);
+
+    return {
+      totalCount: countResult[0]?.totalCount ?? 0,
+      rows,
+    };
   }
 
   async getById(id: string): Promise<UserSelectSchema[]> {
