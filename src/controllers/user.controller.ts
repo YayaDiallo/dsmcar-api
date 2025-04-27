@@ -29,7 +29,7 @@ class UserController {
   async getById(request: Request<ParamsWithId>, response: Response) {
     const { id } = request.params;
 
-    const [user] = await this.userService.getById(id);
+    const user = await this.userService.getById(id);
     if (!user) {
       throw new NotFound({
         message: `User not found with id: \`${id}\``,
