@@ -26,8 +26,12 @@ class UserService {
     };
   }
 
-  async getById(id: string): Promise<UserSelectSchema[]> {
-    return db.select().from(usersTable).where(eq(usersTable.id, id));
+  async getById(id: string): Promise<UserSelectSchema | undefined> {
+    const [user] = await db
+      .select()
+      .from(usersTable)
+      .where(eq(usersTable.id, id));
+    return user;
   }
 
   async update(
