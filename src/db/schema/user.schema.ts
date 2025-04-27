@@ -19,8 +19,7 @@ export const usersTable = pgTable('users', {
   updatedAt: timestamp({ mode: 'string' }).notNull().defaultNow(),
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const userSelectSchema = createSelectSchema(usersTable);
+export const userSelectSchema = createSelectSchema(usersTable);
 
 export const userInsertSchema = createInsertSchema(usersTable, {
   email: (schema) => schema.email(),
