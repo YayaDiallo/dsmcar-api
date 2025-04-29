@@ -1,11 +1,7 @@
 import { db } from '@/db/index.js';
 import { UserSelectSchema, usersTable } from '@/db/schema/user.schema.js';
+import { GetCollectionResponse } from '@/services/service.helper.js';
 import { eq, count } from 'drizzle-orm';
-
-interface GetCollectionResponse<T> {
-  totalCount: number;
-  rows: T[];
-}
 
 class UserService {
   async create(

@@ -3,7 +3,8 @@ import {
   ActivitySelectSchema,
   activitiesTable,
 } from '@/db/schema/activity.schema.js';
-import { eq } from 'drizzle-orm';
+import { GetCollectionResponse } from '@/services/service.helper.js';
+import { eq, count } from 'drizzle-orm';
 
 class ActivityService {
   async create(
@@ -15,8 +16,17 @@ class ActivityService {
       .returning();
     return activity;
   }
-  async getAll(): Promise<ActivitySelectSchema[]> {
-    return db.select().from(activitiesTable);
+  async getAll(): Promise<GetCollectionResponse<ActivitySelectSchema>> {
+    const [rows, countResult] = await Promise.all([
+      db.select().from(activitiesTable),
+      db
+        .select({ totalCount: count(activitiesTable.id) })
+        .from(activitiesTable),
+    ]);
+    return {
+      totalCount: countResult[0]?.totalCount ?? 0,
+      rows,
+    };
   }
 
   async getById(id: string): Promise<ActivitySelectSchema[]> {
