@@ -16,7 +16,7 @@ class ActivityService {
       .returning();
     return activity;
   }
-  async getAll(): Promise<GetCollectionResponse<ActivitySelectSchema>> {
+  async getCollection(): Promise<GetCollectionResponse<ActivitySelectSchema>> {
     const [rows, countResult] = await Promise.all([
       db.select().from(activitiesTable),
       db

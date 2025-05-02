@@ -9,7 +9,7 @@ import express from 'express';
 
 export const activityRouter = express.Router();
 
-activityRouter.get('/', activityController.getAll);
+activityRouter.get('/', activityController.getCollection);
 activityRouter.get(
   '/:id',
   validateRequest({ params: ParamsWithId }),

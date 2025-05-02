@@ -10,7 +10,7 @@ class ActivityController {
   constructor() {
     this.activityService = activityService;
     this.path = '/activities';
-    this.getAll = this.getAll.bind(this);
+    this.getCollection = this.getCollection.bind(this);
     this.getById = this.getById.bind(this);
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
@@ -22,8 +22,8 @@ class ActivityController {
     response.status(201).location(`${this.path}/${activity?.id}`).send();
   }
 
-  async getAll(request: Request, response: Response) {
-    const activities = await this.activityService.getAll();
+  async getCollection(request: Request, response: Response) {
+    const activities = await this.activityService.getCollection();
     response.json(activities);
   }
   async getById(request: Request<ParamsWithId>, response: Response) {
