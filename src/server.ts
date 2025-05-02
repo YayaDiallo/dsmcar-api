@@ -1,5 +1,10 @@
 import { errorHandler } from '@/middlewares/index.js';
-import { aboutRouter, activityRouter, userRouter } from '@/routes/index.js';
+import {
+  aboutRouter,
+  activityRouter,
+  userRouter,
+  carRouter,
+} from '@/routes/index.js';
 import express, { Application, ErrorRequestHandler } from 'express';
 
 export class Server {
@@ -18,8 +23,9 @@ export class Server {
 
   private initializeRoutes(): void {
     this.app.use('/api', aboutRouter);
-    this.app.use('/api/users', userRouter);
     this.app.use('/api/activities', activityRouter);
+    this.app.use('/api/cars', carRouter);
+    this.app.use('/api/users', userRouter);
   }
 
   start(port: number): void {
