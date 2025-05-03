@@ -30,4 +30,5 @@ export const userUpdateSchema = createUpdateSchema(usersTable, {
   password: (schema) => schema.min(6),
 }).strict();
 
+export type UserInsertSchema = z.infer<typeof userInsertSchema>;
 export type UserSelectSchema = z.infer<typeof userSelectSchema>;
