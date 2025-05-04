@@ -22,4 +22,5 @@ export const activitySelectSchema = createSelectSchema(activitiesTable);
 export const activityInsertSchema = createInsertSchema(activitiesTable);
 export const activityUpdateSchema = createUpdateSchema(activitiesTable);
 
+export type ActivityInsertSchema = z.infer<typeof activitySelectSchema>;
 export type ActivitySelectSchema = z.infer<typeof activitySelectSchema>;

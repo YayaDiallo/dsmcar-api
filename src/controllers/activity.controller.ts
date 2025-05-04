@@ -29,7 +29,7 @@ class ActivityController {
   async getById(request: Request<ParamsWithId>, response: Response) {
     const { id } = request.params;
 
-    const [activity] = await this.activityService.getById(id);
+    const activity = await this.activityService.getById(id);
     if (!activity) {
       throw new NotFound({
         message: `Activity not found with id: \`${id}\``,
