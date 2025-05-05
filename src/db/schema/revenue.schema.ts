@@ -28,4 +28,5 @@ export const revenueSelectSchema = createSelectSchema(revenuesTable);
 export const revenueInsertSchema = createInsertSchema(revenuesTable);
 export const revenueUpdateSchema = createUpdateSchema(revenuesTable);
 
+export type RevenueInsertSchema = z.infer<typeof revenueInsertSchema>;
 export type RevenueSelectSchema = z.infer<typeof revenueSelectSchema>;

@@ -34,4 +34,5 @@ export const expenseSelectSchema = createSelectSchema(expensesTable);
 export const expenseInsertSchema = createInsertSchema(expensesTable);
 export const expenseUpdateSchema = createUpdateSchema(expensesTable);
 
+export type ExpenseInsertSchema = z.infer<typeof expenseInsertSchema>;
 export type ExpenseSelectSchema = z.infer<typeof expenseSelectSchema>;

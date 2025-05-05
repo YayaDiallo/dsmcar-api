@@ -17,4 +17,5 @@ export const categorySelectSchema = createSelectSchema(categoriesTable);
 export const categoryInsertSchema = createInsertSchema(categoriesTable);
 export const categoryUpdateSchema = createUpdateSchema(categoriesTable);
 
+export type CategoryInsertSchema = z.infer<typeof categorySelectSchema>;
 export type CategorySelectSchema = z.infer<typeof categorySelectSchema>;

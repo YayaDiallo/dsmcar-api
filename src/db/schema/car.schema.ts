@@ -24,4 +24,5 @@ export const carSelectSchema = createSelectSchema(carsTable);
 export const carInsertSchema = createInsertSchema(carsTable);
 export const carUpdateSchema = createUpdateSchema(carsTable);
 
+export type CarInsertSchema = z.infer<typeof carInsertSchema>;
 export type CarSelectSchema = z.infer<typeof carSelectSchema>;
