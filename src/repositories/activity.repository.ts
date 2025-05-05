@@ -13,6 +13,7 @@ class ActivityRepository implements BaseRepository<ActivitySelectSchema> {
   constructor() {
     this.table = activitiesTable;
   }
+
   async create(data: ActivityInsertSchema): Promise<ActivitySelectSchema[]> {
     const user = await db.insert(this.table).values(data).returning();
     return user;

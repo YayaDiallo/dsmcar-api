@@ -13,6 +13,7 @@ class UserRepository implements BaseRepository<UserSelectSchema> {
   constructor() {
     this.table = usersTable;
   }
+
   async create(data: UserInsertSchema): Promise<UserSelectSchema[]> {
     const user = await db.insert(this.table).values(data).returning();
     return user;
@@ -30,13 +31,10 @@ class UserRepository implements BaseRepository<UserSelectSchema> {
     return user;
   }
 
-  async update(
-    id: string,
-    userData: UserInsertSchema,
-  ): Promise<{ id: string }[]> {
+  async update(id: string, data: UserInsertSchema): Promise<{ id: string }[]> {
     const user = await db
       .update(this.table)
-      .set({ ...userData })
+      .set({ ...data })
       .where(eq(this.table.id, id))
       .returning({ id: this.table.id });
 
