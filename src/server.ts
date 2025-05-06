@@ -25,7 +25,7 @@ export class Server {
     this.app.use('/api', aboutRouter);
     this.app.use('/api/activities', activityRouter);
     this.app.use('/api/cars', carRouter);
-    this.app.use('/api/users', userRouter);
+    this.app.use('/api', userRouter);
   }
 
   start(port: number): void {
