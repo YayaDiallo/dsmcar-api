@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 
 class UserController {
   private userService: typeof userService;
-  private path: string;
+  readonly path: string;
 
   constructor() {
     this.userService = userService;
