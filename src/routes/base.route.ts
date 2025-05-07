@@ -1,6 +1,6 @@
 import express from 'express';
 
-export interface Controller {
+interface Controller {
   path: string;
 }
 
