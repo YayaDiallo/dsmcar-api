@@ -15,6 +15,17 @@ class UserRouter {
     this.router = express.Router();
     this.initializeRoutes();
   }
+
+  private bindController<K extends keyof typeof userController>(methodName: K) {
+    const method = this.controller[methodName];
+    if (typeof method === 'function') {
+      return method.bind(this.controller);
+    }
+    throw new Error(
+      `Controller method ${String(methodName)} is not a function`,
+    );
+  }
+
   private initializeRoutes() {
     this.router.get(this.path, this.controller.getCollection);
     this.router.get(`${this.path}/:id`, this.controller.getById);
