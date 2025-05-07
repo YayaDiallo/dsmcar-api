@@ -1,52 +1,12 @@
-import { NotFound } from '@/errors/index.js';
-import { ParamsWithId } from '@/interfaces/index.js';
 import { userService } from '@/services/index.js';
-import { Request, Response } from 'express';
+import { BaseController } from './base.controller.js';
 
-class UserController {
-  private userService: typeof userService;
-  readonly path: string;
-
+class UserController extends BaseController<typeof userService> {
   constructor() {
-    this.userService = userService;
-    this.path = '/users';
-  }
-
-  async create(request: Request, response: Response) {
-    const [user] = await this.userService.create(request.body);
-    response.status(201).location(`${this.path}/${user?.id}`).send();
-  }
-
-  async getCollection(request: Request, response: Response) {
-    const users = await this.userService.getCollection();
-    response.json(users);
-  }
-  async getById(request: Request<ParamsWithId>, response: Response) {
-    const { id } = request.params;
-
-    const user = await this.userService.getById(id);
-    if (!user) {
-      throw new NotFound({
-        message: `User not found with id: \`${id}\``,
-        statusCode: 404,
-        code: 'ERR_NOT_FOUND',
-      });
-    }
-    response.json(user);
-  }
-
-  async update(request: Request<ParamsWithId>, response: Response) {
-    const { id } = request.params;
-
-    const user = await this.userService.update(id, request.body);
-    response.status(200).json({ user });
-  }
-
-  async delete(request: Request<ParamsWithId>, response: Response) {
-    const { id } = request.params;
-
-    await this.userService.delete(id);
-    response.status(204).send();
+    super({
+      path: '/users',
+      service: userService,
+    });
   }
 }
 
