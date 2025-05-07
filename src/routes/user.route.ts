@@ -27,19 +27,19 @@ class UserRouter {
   }
 
   private initializeRoutes() {
-    this.router.get(this.path, this.controller.getCollection);
-    this.router.get(`${this.path}/:id`, this.controller.getById);
+    this.router.get(this.path, this.bindController('getCollection'));
+    this.router.get(`${this.path}/:id`, this.bindController('getById'));
     this.router.post(
       this.path,
       validateRequest({ body: userInsertSchema }),
-      this.controller.create,
+      this.bindController('create'),
     );
     this.router.patch(
       `${this.path}/:id`,
       validateRequest({ params: ParamsWithId, body: userUpdateSchema }),
-      this.controller.update,
+      this.bindController('update'),
     );
-    this.router.delete(`${this.path}/:id`, this.controller.delete);
+    this.router.delete(`${this.path}/:id`, this.bindController('delete'));
   }
 }
 export const userRouter = new UserRouter().router;

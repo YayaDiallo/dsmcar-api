@@ -10,11 +10,6 @@ class UserController {
   constructor() {
     this.userService = userService;
     this.path = '/users';
-    this.getCollection = this.getCollection.bind(this);
-    this.getById = this.getById.bind(this);
-    this.create = this.create.bind(this);
-    this.update = this.update.bind(this);
-    this.delete = this.delete.bind(this);
   }
 
   async create(request: Request, response: Response) {
