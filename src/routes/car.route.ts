@@ -1,29 +1,29 @@
 import { carController } from '@/controllers/index.js';
-import { carInsertSchema, carUpdateSchema } from '@/db/schema/car.schema.js';
+import { userInsertSchema, userUpdateSchema } from '@/db/schema/user.schema.js';
 import { ParamsWithId } from '@/interfaces/index.js';
 import { validateRequest } from '@/middlewares/index.js';
-import express from 'express';
+import { BaseRoute } from './base.route.js';
 
-export const carRouter = express.Router();
+class CarRouter extends BaseRoute<typeof carController> {
+  constructor() {
+    super({ controller: carController });
+  }
 
-carRouter.get('/', carController.getCollection);
-carRouter.get(
-  '/:id',
-  validateRequest({ params: ParamsWithId }),
-  carController.getById,
-);
-carRouter.post(
-  '/',
-  validateRequest({ body: carInsertSchema }),
-  carController.create,
-);
-carRouter.patch(
-  '/:id',
-  validateRequest({ params: ParamsWithId, body: carUpdateSchema }),
-  carController.update,
-);
-carRouter.delete(
-  '/:id',
-  validateRequest({ params: ParamsWithId }),
-  carController.delete,
-);
+  protected initializeRoutes() {
+    this.router.get(this.path, this.bindController('getCollection'));
+    this.router.get(`${this.path}/:id`, this.bindController('getById'));
+    this.router.post(
+      this.path,
+      validateRequest({ body: userInsertSchema }),
+      this.bindController('create'),
+    );
+    this.router.patch(
+      `${this.path}/:id`,
+      validateRequest({ params: ParamsWithId, body: userUpdateSchema }),
+      this.bindController('update'),
+    );
+    this.router.delete(`${this.path}/:id`, this.bindController('delete'));
+  }
+}
+
+export const carRouter = new CarRouter().router;

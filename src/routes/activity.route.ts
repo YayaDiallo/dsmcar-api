@@ -1,32 +1,29 @@
 import { activityController } from '@/controllers/index.js';
-import {
-  activityInsertSchema,
-  activityUpdateSchema,
-} from '@/db/schema/activity.schema.js';
+import { userInsertSchema, userUpdateSchema } from '@/db/schema/user.schema.js';
 import { ParamsWithId } from '@/interfaces/index.js';
 import { validateRequest } from '@/middlewares/index.js';
-import express from 'express';
+import { BaseRoute } from './base.route.js';
 
-export const activityRouter = express.Router();
+class ActivityRouter extends BaseRoute<typeof activityController> {
+  constructor() {
+    super({ controller: activityController });
+  }
 
-activityRouter.get('/', activityController.getCollection);
-activityRouter.get(
-  '/:id',
-  validateRequest({ params: ParamsWithId }),
-  activityController.getById,
-);
-activityRouter.post(
-  '/',
-  validateRequest({ body: activityInsertSchema }),
-  activityController.create,
-);
-activityRouter.patch(
-  '/:id',
-  validateRequest({ params: ParamsWithId, body: activityUpdateSchema }),
-  activityController.update,
-);
-activityRouter.delete(
-  '/:id',
-  validateRequest({ params: ParamsWithId }),
-  activityController.delete,
-);
+  protected initializeRoutes() {
+    this.router.get(this.path, this.bindController('getCollection'));
+    this.router.get(`${this.path}/:id`, this.bindController('getById'));
+    this.router.post(
+      this.path,
+      validateRequest({ body: userInsertSchema }),
+      this.bindController('create'),
+    );
+    this.router.patch(
+      `${this.path}/:id`,
+      validateRequest({ params: ParamsWithId, body: userUpdateSchema }),
+      this.bindController('update'),
+    );
+    this.router.delete(`${this.path}/:id`, this.bindController('delete'));
+  }
+}
+
+export const activityRouter = new ActivityRouter().router;
