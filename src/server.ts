@@ -4,6 +4,7 @@ import {
   activityRouter,
   userRouter,
   carRouter,
+  expenseRouter,
 } from '@/routes/index.js';
 import express, { Application, ErrorRequestHandler } from 'express';
 
@@ -25,6 +26,7 @@ export class Server {
     this.app.use('/api', aboutRouter);
     this.app.use('/api', activityRouter);
     this.app.use('/api', carRouter);
+    this.app.use('/api', expenseRouter);
     this.app.use('/api', userRouter);
   }
 
