@@ -23,8 +23,8 @@ export class Server {
 
   private initializeRoutes(): void {
     this.app.use('/api', aboutRouter);
-    this.app.use('/api/activities', activityRouter);
-    this.app.use('/api/cars', carRouter);
+    this.app.use('/api', activityRouter);
+    this.app.use('/api', carRouter);
     this.app.use('/api', userRouter);
   }
 
