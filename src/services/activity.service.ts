@@ -2,7 +2,7 @@ import {
   ActivitySelectSchema,
   ActivityInsertSchema,
 } from '@/db/schema/activity.schema.js';
-import { activityRepository } from '@/repositories/activity.repository.js';
+import { activityRepository } from '@/repositories/index.js';
 import { BaseService } from '@/services/base.service.js';
 
 class ActivityService extends BaseService<
