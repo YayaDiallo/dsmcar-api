@@ -2,11 +2,9 @@ import { errorHandler } from '@/middlewares/index.js';
 import {
   aboutRouter,
   activityRouter,
-  userRouter,
   carRouter,
-  expenseRouter,
-  revenueRouter,
   categoryRouter,
+  userRouter,
 } from '@/routes/index.js';
 import express, { Application, ErrorRequestHandler } from 'express';
 
@@ -29,8 +27,6 @@ export class Server {
     this.app.use('/api', activityRouter);
     this.app.use('/api', carRouter);
     this.app.use('/api', categoryRouter);
-    this.app.use('/api', expenseRouter);
-    this.app.use('/api', revenueRouter);
     this.app.use('/api', userRouter);
   }
 
