@@ -29,6 +29,13 @@
       "when": 1746974426922,
       "tag": "0003_remove-expense-and-revenue",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1747002486391,
+      "tag": "0004_create-recurringTransactions",
+      "breakpoints": true
     }
   ]
 }
