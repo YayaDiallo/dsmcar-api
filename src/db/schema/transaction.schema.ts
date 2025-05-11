@@ -16,7 +16,7 @@ import {
 } from 'drizzle-zod';
 import { z } from 'zod';
 
-const kindEnum = pgEnum('kind', ['income', 'expense']);
+export const kindEnum = pgEnum('kind', ['expense', 'income']);
 
 export const transactionsTable = pgTable('transactions', {
   id: uuid().notNull().primaryKey().defaultRandom(),
