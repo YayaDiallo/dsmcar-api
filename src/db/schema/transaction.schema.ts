@@ -1,5 +1,6 @@
 import { activitiesTable } from '@/db/schema/activity.schema.js';
 import { categoriesTable } from '@/db/schema/category.schema.js';
+import { recurringTransactionsTable } from '@/db/schema/recurringTransaction.schema.js';
 import {
   date,
   numeric,
@@ -26,6 +27,9 @@ export const transactionsTable = pgTable('transactions', {
   categoryId: uuid()
     .references(() => categoriesTable.id)
     .notNull(),
+  recurringTransactionId: uuid().references(
+    () => recurringTransactionsTable.id,
+  ),
   name: varchar({ length: 255 }).notNull(),
   kind: kindEnum().default('expense').notNull(),
   amount: numeric({ precision: 12, scale: 2 }).notNull(),
