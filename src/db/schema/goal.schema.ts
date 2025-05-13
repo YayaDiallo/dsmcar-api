@@ -1,6 +1,7 @@
 import { activitiesTable } from '@/db/schema/activity.schema.js';
 import { frequencyEnum } from '@/db/schema/recurringTransaction.schema.js';
 import {
+  AnyPgColumn,
   boolean,
   date,
   numeric,
@@ -21,6 +22,7 @@ export const goalsTable = pgTable('goals', {
   activityId: uuid()
     .references(() => activitiesTable.id)
     .notNull(),
+  parentGoalId: uuid().references((): AnyPgColumn => goalsTable.id),
   name: varchar({ length: 255 }),
   frequency: frequencyEnum().default('monthly').notNull(),
   targetAmount: numeric({ precision: 12, scale: 2 }).notNull(),
