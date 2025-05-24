@@ -17,6 +17,7 @@ import {
 } from 'drizzle-zod';
 import { z } from 'zod';
 
+// @see https://github.com/drizzle-team/drizzle-orm/issues/4308
 export const goalsTable = pgTable('goals', {
   id: uuid().notNull().primaryKey().defaultRandom(),
   activityId: uuid()
