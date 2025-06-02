@@ -8,6 +8,7 @@ import {
   transactionRouter,
   userRouter,
 } from '@/routes/index.js';
+import cookieParser from 'cookie-parser';
 import express, { Application, ErrorRequestHandler } from 'express';
 
 export class Server {
@@ -22,6 +23,7 @@ export class Server {
 
   private initializeMiddlewares(): void {
     this.app.use(express.json());
+    this.app.use(cookieParser());
   }
 
   private initializeRoutes(): void {
