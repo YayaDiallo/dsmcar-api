@@ -2,6 +2,7 @@ import { errorHandler } from '@/middlewares/index.js';
 import {
   aboutRouter,
   activityRouter,
+  authRouter,
   carRouter,
   categoryRouter,
   goalRouter,
@@ -29,6 +30,7 @@ export class Server {
   private initializeRoutes(): void {
     this.app.use('/api', aboutRouter);
     this.app.use('/api', activityRouter);
+    this.app.use('/api', authRouter);
     this.app.use('/api', carRouter);
     this.app.use('/api', categoryRouter);
     this.app.use('/api', goalRouter);
