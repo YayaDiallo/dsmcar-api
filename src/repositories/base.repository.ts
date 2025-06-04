@@ -5,9 +5,3 @@ export interface BaseRepository<T, InsertSchema = T> {
   update(id: string, data: InsertSchema): Promise<{ id: string }[]>;
   delete(id: string): Promise<void>;
 }
-
-export type ExtendedRepository<
-  T,
-  InsertSchema = T,
-  AdditionalMethods = Record<string, unknown>,
-> = BaseRepository<T, InsertSchema> & AdditionalMethods;
