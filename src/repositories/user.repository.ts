@@ -7,7 +7,12 @@ import {
 import { BaseRepository } from '@/repositories/base.repository.js';
 import { eq } from 'drizzle-orm';
 
-class UserRepository implements BaseRepository<UserSelectSchema> {
+interface UserRepositoryInterface
+  extends BaseRepository<UserSelectSchema, UserInsertSchema> {
+  getByEmail(email: string): Promise<UserSelectSchema | undefined>;
+}
+
+class UserRepository implements UserRepositoryInterface {
   private readonly table;
 
   constructor() {
@@ -28,6 +33,14 @@ class UserRepository implements BaseRepository<UserSelectSchema> {
       .select()
       .from(usersTable)
       .where(eq(usersTable.id, id));
+    return user;
+  }
+
+  async getByEmail(email: string): Promise<UserSelectSchema | undefined> {
+    const [user] = await db
+      .select()
+      .from(usersTable)
+      .where(eq(usersTable.email, email));
     return user;
   }
 
