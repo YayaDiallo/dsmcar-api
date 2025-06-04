@@ -1,9 +1,19 @@
 import { BaseRepository } from '@/repositories/base.repository.js';
 import { GetCollectionResponse } from '@/services/service.helper.js';
 
-export abstract class BaseService<T, InsertType = T> {
-  constructor(protected readonly repository: BaseRepository<T, InsertType>) {}
+export class BaseService<
+  T,
+  InsertType = T,
+  Repository extends BaseRepository<T, InsertType> = BaseRepository<
+    T,
+    InsertType
+  >,
+> {
+  protected repository: Repository;
 
+  constructor(repository: Repository) {
+    this.repository = repository;
+  }
   async create(data: InsertType): Promise<T[]> {
     return this.repository.create(data);
   }
