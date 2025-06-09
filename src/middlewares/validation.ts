@@ -10,57 +10,51 @@ interface RequestValidators {
 
 type AuthValidators = Omit<RequestValidators, 'params' | 'query'>;
 
-export function validateAuthRequest(validators: AuthValidators) {
+function createValidationErrorMessage(error: ZodError): string {
+  const field = !error.issues[0]?.path[0]
+    ? ''
+    : `${error.issues[0]?.path[0]}: `;
+  return `${field}${error.issues[0]?.message}`;
+}
+
+function handleValidationError(error: unknown, next: NextFunction): void {
+  if (error instanceof ZodError) {
+    const message = createValidationErrorMessage(error);
+    throw new BadRequest({
+      message,
+      statusCode: 400,
+      code: 'ERR_VALIDATION',
+    });
+  }
+  next(error);
+}
+
+function createValidationMiddleware(validators: RequestValidators) {
   return async (request: Request, response: Response, next: NextFunction) => {
     try {
-      if (validators.body) {
-        request.body = await validators.body.parseAsync(request.body);
+      const validationTasks = [
+        { validator: validators.params, target: 'params' as const },
+        { validator: validators.body, target: 'body' as const },
+        { validator: validators.query, target: 'query' as const },
+      ];
+
+      for (const { validator, target } of validationTasks) {
+        if (validator) {
+          request[target] = await validator.parseAsync(request[target]);
+        }
       }
 
       next();
     } catch (error) {
-      if (error instanceof ZodError) {
-        const field = !error.issues[0]?.path[0]
-          ? ''
-          : `${error.issues[0]?.path[0]}: `;
-        const message = `${field}${error.issues[0]?.message}`;
-        throw new BadRequest({
-          message: message,
-          statusCode: 400,
-          code: 'ERR_VALIDATION',
-        });
-      }
-      next(error);
+      handleValidationError(error, next);
     }
   };
 }
 
+export function validateAuthRequest(validators: AuthValidators) {
+  return createValidationMiddleware(validators);
+}
+
 export function validateRequest(validators: RequestValidators) {
-  return async (request: Request, response: Response, next: NextFunction) => {
-    try {
-      if (validators.params) {
-        request.params = await validators.params.parseAsync(request.params);
-      }
-      if (validators.body) {
-        request.body = await validators.body.parseAsync(request.body);
-      }
-      if (validators.query) {
-        request.query = await validators.query.parseAsync(request.query);
-      }
-      next();
-    } catch (error) {
-      if (error instanceof ZodError) {
-        const field = !error.issues[0]?.path[0]
-          ? ''
-          : `${error.issues[0]?.path[0]}: `;
-        const message = `${field}${error.issues[0]?.message}`;
-        throw new BadRequest({
-          message: message,
-          statusCode: 400,
-          code: 'ERR_VALIDATION',
-        });
-      }
-      next(error);
-    }
-  };
+  return createValidationMiddleware(validators);
 }
