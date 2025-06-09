@@ -1,7 +1,13 @@
 import { authController } from '@/controllers/index.js';
 import { userInsertSchema } from '@/db/schema/user.schema.js';
-import { validateRequest } from '@/middlewares/index.js';
+import { validateRequest, validateAuthRequest } from '@/middlewares/index.js';
 import { BaseRoute } from './base.route.js';
+import { z } from 'zod';
+
+const LoginSchema = z.object({
+  email: z.string().email(),
+  password: z.string(),
+});
 
 class AuthRouter extends BaseRoute<typeof authController> {
   constructor() {
@@ -11,7 +17,7 @@ class AuthRouter extends BaseRoute<typeof authController> {
   protected initializeRoutes() {
     this.router.post(
       `${this.path}/login`,
-      validateRequest({ body: userInsertSchema }),
+      validateAuthRequest({ body: LoginSchema }),
       this.bindController('login'),
     );
     this.router.post(
