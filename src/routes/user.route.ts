@@ -1,7 +1,7 @@
 import { userController } from '@/controllers/index.js';
 import { userInsertSchema, userUpdateSchema } from '@/db/schema/user.schema.js';
 import { ParamsWithId } from '@/interfaces/index.js';
-import { validateRequest } from '@/middlewares/index.js';
+import { auth, validateRequest } from '@/middlewares/index.js';
 import { BaseRoute } from './base.route.js';
 
 class UserRouter extends BaseRoute<typeof userController> {
@@ -10,7 +10,7 @@ class UserRouter extends BaseRoute<typeof userController> {
   }
 
   protected initializeRoutes() {
-    this.router.get(this.path, this.bindController('getCollection'));
+    this.router.get(this.path, auth, this.bindController('getCollection'));
     this.router.get(`${this.path}/:id`, this.bindController('getById'));
     this.router.post(
       this.path,
