@@ -24,7 +24,8 @@ export class Server {
 
   private initializeMiddlewares(): void {
     this.app.use(express.json());
-    this.app.use(cookieParser());
+    // TODO: Use a more secure secret key
+    this.app.use(cookieParser('signed_secret_key'));
   }
 
   private initializeRoutes(): void {
