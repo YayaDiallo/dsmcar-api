@@ -8,6 +8,33 @@ interface RequestValidators {
   query?: AnyZodObject;
 }
 
+type AuthValidators = Omit<RequestValidators, 'params' | 'query'>;
+
+export function validateAuthRequest(validators: AuthValidators) {
+  return async (request: Request, response: Response, next: NextFunction) => {
+    try {
+      if (validators.body) {
+        request.body = await validators.body.parseAsync(request.body);
+      }
+
+      next();
+    } catch (error) {
+      if (error instanceof ZodError) {
+        const field = !error.issues[0]?.path[0]
+          ? ''
+          : `${error.issues[0]?.path[0]}: `;
+        const message = `${field}${error.issues[0]?.message}`;
+        throw new BadRequest({
+          message: message,
+          statusCode: 400,
+          code: 'ERR_VALIDATION',
+        });
+      }
+      next(error);
+    }
+  };
+}
+
 export function validateRequest(validators: RequestValidators) {
   return async (request: Request, response: Response, next: NextFunction) => {
     try {
