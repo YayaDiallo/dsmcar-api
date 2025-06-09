@@ -4,7 +4,7 @@ import { BaseService } from '@/services/base.service.js';
 
 class CarService extends BaseService<CarSelectSchema, CarInsertSchema> {
   constructor() {
-    super(carRepository);
+    super({ repository: carRepository });
   }
 }
 

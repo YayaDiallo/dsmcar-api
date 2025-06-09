@@ -10,7 +10,7 @@ class RecurringTransactionService extends BaseService<
   RecurringTransactionInsertSchema
 > {
   constructor() {
-    super(recurringTransactionRepository);
+    super({ repository: recurringTransactionRepository });
   }
 }
 

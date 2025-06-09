@@ -10,7 +10,7 @@ class CategoryService extends BaseService<
   CategoryInsertSchema
 > {
   constructor() {
-    super(categoryRepository);
+    super({ repository: categoryRepository });
   }
 }
 

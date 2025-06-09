@@ -11,7 +11,7 @@ export class BaseService<
 > {
   protected repository: Repository;
 
-  constructor(repository: Repository) {
+  constructor({ repository }: { repository: Repository }) {
     this.repository = repository;
   }
   async create(data: InsertType): Promise<T[]> {

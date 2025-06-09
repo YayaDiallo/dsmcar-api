@@ -10,7 +10,7 @@ class ActivityService extends BaseService<
   ActivityInsertSchema
 > {
   constructor() {
-    super(activityRepository);
+    super({ repository: activityRepository });
   }
 }
 

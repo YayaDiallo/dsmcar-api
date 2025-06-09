@@ -4,7 +4,7 @@ import { BaseService } from '@/services/base.service.js';
 
 class GoalService extends BaseService<GoalSelectSchema, GoalInsertSchema> {
   constructor() {
-    super(goalRepository);
+    super({ repository: goalRepository });
   }
 }
 

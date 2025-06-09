@@ -10,7 +10,7 @@ class AuthService extends BaseService<
   UserRepositoryType
 > {
   constructor() {
-    super(userRepository);
+    super({ repository: userRepository });
   }
 
   async register(data: UserInsertSchema) {

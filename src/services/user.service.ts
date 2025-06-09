@@ -4,7 +4,7 @@ import { BaseService } from './base.service.js';
 
 class UserService extends BaseService<UserSelectSchema, UserInsertSchema> {
   constructor() {
-    super(userRepository);
+    super({ repository: userRepository });
   }
 }
 

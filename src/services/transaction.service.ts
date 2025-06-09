@@ -10,7 +10,7 @@ class TransactionService extends BaseService<
   TransactionInsertSchema
 > {
   constructor() {
-    super(transactionRepository);
+    super({ repository: transactionRepository });
   }
 }
 
