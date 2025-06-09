@@ -1,4 +1,5 @@
 import { UserInsertSchema, UserSelectSchema } from '@/db/schema/user.schema.js';
+import { Unauthenticated } from '@/errors/unauthenticated.js';
 import { userRepository } from '@/repositories/index.js';
 import { BaseService } from '@/services/base.service.js';
 
@@ -17,15 +18,15 @@ class AuthService extends BaseService<
     return this.repository.create(data);
   }
 
+  // TODO: Implement proper password hashing and validation
   async login({ email, password }: { email: string; password: string }) {
-    const token = { id: '', token: '' };
     const user = await this.repository.getByEmail(email);
-    if (password === user?.password) {
-      token.id = user.id;
-      token.token = '123';
-      return { user, token };
-    }
-    throw new Error('Invalid credentials');
+    if (password === user?.password) return user;
+
+    throw new Unauthenticated({
+      message: 'Invalid email and/or password.',
+      statusCode: 401,
+    });
   }
 }
 
