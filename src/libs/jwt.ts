@@ -1,3 +1,4 @@
+import { authConfig } from '@/config/index.js';
 import { sign, SignOptions, verify, JwtPayload } from 'jsonwebtoken';
 
 class JWTService {
@@ -9,7 +10,7 @@ class JWTService {
     expiresIn: SignOptions['expiresIn'];
   }): Promise<string> {
     return new Promise((resolve, reject) => {
-      sign(payload, 'JWT_SECRET', { expiresIn }, (error, token) => {
+      sign(payload, authConfig.jwtSecret, { expiresIn }, (error, token) => {
         if (error) return reject(error);
         else return resolve(token as string);
       });
