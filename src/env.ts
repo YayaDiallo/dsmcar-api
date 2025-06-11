@@ -12,13 +12,14 @@ const EnvSchema = z.object({
   NODE_ENV: z.string().default('development'),
   DOCKER_CMD: z.string(),
   PORT: z.coerce.number().default(8080),
+  DEBUG_MODE: stringBoolean,
   DB_HOST: z.string(),
   DB_USER: z.string(),
   DB_PASSWORD: z.string(),
   DB_NAME: z.string(),
   DB_PORT: z.coerce.number(),
   DATABASE_URL: z.string(),
-  DEBUG_MODE: stringBoolean,
+  JWT_SECRET: z.string(),
 });
 
 export type EnvSchema = z.infer<typeof EnvSchema>;
