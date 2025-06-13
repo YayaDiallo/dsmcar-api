@@ -2,13 +2,13 @@ import { authConfig } from '@/config/index.js';
 import jwt, { JwtPayload, SignOptions } from 'jsonwebtoken';
 
 class JWTService {
-  async generateToken({
-    payload,
-    expiresIn = '1h',
-  }: {
-    payload: { userId: string; email: string };
-    expiresIn: SignOptions['expiresIn'];
-  }): Promise<string> {
+  async generateToken(
+    payload: {
+      userId: string;
+      email: string;
+    },
+    expiresIn: SignOptions['expiresIn'] = '1h',
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       jwt.sign(payload, authConfig.jwtSecret, { expiresIn }, (error, token) => {
         if (error) return reject(error);
