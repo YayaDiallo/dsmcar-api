@@ -27,7 +27,7 @@ class AuthController extends BaseController<typeof authService> {
 
     const user = await this.service.login(request.body);
 
-    cookieService.attachCookieToResponse(response, {
+await     cookieService.attachCookieToResponse(response, {
       userId: user.id,
       email: user.email,
     });
