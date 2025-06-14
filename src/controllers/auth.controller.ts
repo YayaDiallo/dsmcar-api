@@ -1,25 +1,5 @@
 import { authService } from '@/services/index.js';
 import { BaseController } from './base.controller.js';
-import { Request, Response } from 'express';
-
-// TODO: move this to a separate utility file
-function attachCookiesToResponse({
-  response,
-  token,
-}: {
-  response: Response;
-  token: string;
-  userId?: string;
-}) {
-  const cookieOptions = {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    signed: true,
-    maxAge: 24 * 60 * 60 * 1000,
-  };
-
-  response.cookie('accessToken', token, cookieOptions);
-}
 
 class AuthController extends BaseController<typeof authService> {
   constructor() {
