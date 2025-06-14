@@ -1,7 +1,7 @@
 import { Unauthenticated } from '@/errors/unauthenticated.js';
 import { Request, Response, NextFunction } from 'express';
 
-export function auth(request: Request, response: Response, next: NextFunction) {
+async function auth(request: Request, response: Response, next: NextFunction) {
   const accessToken = request.signedCookies.accessToken;
 
   if (!accessToken) {
@@ -12,4 +12,12 @@ export function auth(request: Request, response: Response, next: NextFunction) {
   }
 
   next();
+}
+
+export async function assertAuthenticated(
+  request: Request,
+  response: Response,
+  next: NextFunction,
+) {
+  await auth(request, response, next);
 }
