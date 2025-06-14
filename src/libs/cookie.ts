@@ -2,7 +2,7 @@ import { jwtService } from '@/libs/index.js';
 import { Response } from 'express';
 
 class CookieService {
-  async attachCookiesToResponse(
+  async attachCookieToResponse(
     response: Response,
     payload: { userId: string; email: string },
   ) {

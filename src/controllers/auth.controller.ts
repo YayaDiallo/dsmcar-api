@@ -16,7 +16,7 @@ class AuthController extends BaseController<typeof authService> {
     if (!user) {
       return response.status(400).json({ message: 'User registration failed' });
     }
-    cookieService.attachCookiesToResponse(response, {
+    cookieService.attachCookieToResponse(response, {
       userId: user.id,
       email: user.email,
     });
@@ -27,7 +27,7 @@ class AuthController extends BaseController<typeof authService> {
 
     const user = await this.service.login(request.body);
 
-    cookieService.attachCookiesToResponse(response, {
+    cookieService.attachCookieToResponse(response, {
       userId: user.id,
       email: user.email,
     });
