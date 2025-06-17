@@ -1,4 +1,5 @@
 import { Unauthenticated } from '@/errors/unauthenticated.js';
+import { jwtService } from '@/libs/jwt.js';
 import { Request, Response, NextFunction } from 'express';
 
 async function auth(request: Request, response: Response, next: NextFunction) {
@@ -10,7 +11,15 @@ async function auth(request: Request, response: Response, next: NextFunction) {
       statusCode: 401,
     });
   }
-
+  try {
+    await jwtService.verifyToken(accessToken);
+  } catch (error: unknown) {
+    console.log('error:', error);
+    throw new Unauthenticated({
+      message: 'Invalid access token',
+      statusCode: 401,
+    });
+  }
   next();
 }
 
