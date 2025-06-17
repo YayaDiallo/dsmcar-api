@@ -2,7 +2,7 @@ import { Unauthenticated } from '@/errors/unauthenticated.js';
 import { Request, Response, NextFunction } from 'express';
 
 async function auth(request: Request, response: Response, next: NextFunction) {
-  const accessToken = request.signedCookies.accessToken;
+  const accessToken = request.signedCookies.accessToken as string | undefined;
 
   if (!accessToken) {
     throw new Unauthenticated({
