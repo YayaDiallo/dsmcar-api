@@ -17,15 +17,9 @@ class JWTService {
     });
   }
 
-  async verifyToken({
-    token,
-    secret,
-  }: {
-    token: string;
-    secret: string;
-  }): Promise<JwtPayload | string> {
+  async verifyToken(token: string): Promise<JwtPayload | string> {
     return new Promise((resolve, reject) => {
-      jwt.verify(token, secret, (error, decoded) => {
+      jwt.verify(token, authConfig.jwtSecret, (error, decoded) => {
         if (error) return reject(error);
         else return resolve(decoded as JwtPayload | string);
       });
