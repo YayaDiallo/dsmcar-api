@@ -14,7 +14,6 @@ async function auth(request: Request, response: Response, next: NextFunction) {
   try {
     await jwtService.verifyToken(accessToken);
   } catch (error: unknown) {
-    console.log('error:', error);
     throw new Unauthenticated({
       message: 'Invalid access token',
       statusCode: 401,
