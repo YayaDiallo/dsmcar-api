@@ -15,7 +15,11 @@ class UserRouter extends BaseRoute<typeof userController> {
       assertAuthenticated,
       this.bindController('getCollection'),
     );
-    this.router.get(`${this.path}/:id`, this.bindController('getById'));
+    this.router.get(
+      `${this.path}/:id`,
+      assertAuthenticated,
+      this.bindController('getById'),
+    );
     this.router.post(
       this.path,
       validateRequest({ body: userInsertSchema }),
