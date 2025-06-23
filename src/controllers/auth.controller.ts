@@ -35,7 +35,11 @@ class AuthController extends BaseController<typeof authService> {
   }
   async logout(request: Request, response: Response) {
     // TODO: blackList the token
-    response.clearCookie('accessToken');
+    response.clearCookie('accessToken', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      signed: true,
+    });
     response.status(204).send();
   }
 }
