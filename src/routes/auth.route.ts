@@ -20,6 +20,7 @@ class AuthRouter extends BaseRoute<typeof authController> {
       validateAuthRequest({ body: LoginSchema }),
       this.bindController('login'),
     );
+    this.router.post(`${this.path}/logout`, this.bindController('logout'));
     this.router.post(
       `${this.path}/register`,
       validateRequest({ body: userInsertSchema }),

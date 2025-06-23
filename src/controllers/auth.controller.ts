@@ -33,6 +33,11 @@ class AuthController extends BaseController<typeof authService> {
     });
     response.status(200).json({ user });
   }
+  async logout(request: Request, response: Response) {
+    // TODO: blackList the token
+    response.clearCookie('accessToken');
+    response.status(204).send();
+  }
 }
 
 export const authController = new AuthController();
