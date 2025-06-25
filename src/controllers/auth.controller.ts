@@ -23,8 +23,6 @@ class AuthController extends BaseController<typeof authService> {
     response.status(201).json({ user });
   }
   async login(request: Request, response: Response) {
-    await this.service.login(request.body);
-
     const user = await this.service.login(request.body);
 
     await cookieService.attachCookieToResponse(response, {
