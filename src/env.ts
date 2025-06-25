@@ -19,6 +19,7 @@ const EnvSchema = z.object({
   DB_NAME: z.string(),
   DB_PORT: z.coerce.number(),
   DATABASE_URL: z.string(),
+  REDIS_URL: z.string(),
   JWT_SECRET: z.string(),
 });
 
