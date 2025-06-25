@@ -23,11 +23,11 @@ export const userSelectSchema = createSelectSchema(usersTable);
 
 export const userInsertSchema = createInsertSchema(usersTable, {
   email: (schema) => schema.email(),
-  password: (schema) => schema.min(6),
+  password: (schema) => schema.min(8).max(64),
 }).strict();
 export const userUpdateSchema = createUpdateSchema(usersTable, {
   email: (schema) => schema.email(),
-  password: (schema) => schema.min(6),
+  password: (schema) => schema.min(8).max(64),
 }).strict();
 
 export type UserInsertSchema = z.infer<typeof userInsertSchema>;
