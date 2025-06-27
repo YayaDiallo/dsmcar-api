@@ -1,6 +1,10 @@
 import { authController } from '@/controllers/index.js';
 import { userInsertSchema } from '@/db/schema/user.schema.js';
-import { validateRequest, validateAuthRequest } from '@/middlewares/index.js';
+import {
+  validateRequest,
+  validateAuthRequest,
+  assertAuthenticated,
+} from '@/middlewares/index.js';
 import { BaseRoute } from './base.route.js';
 import { z } from 'zod';
 
@@ -20,7 +24,11 @@ class AuthRouter extends BaseRoute<typeof authController> {
       validateAuthRequest({ body: LoginSchema }),
       this.bindController('login'),
     );
-    this.router.post(`${this.path}/logout`, this.bindController('logout'));
+    this.router.post(
+      `${this.path}/logout`,
+      assertAuthenticated,
+      this.bindController('logout'),
+    );
     this.router.post(
       `${this.path}/register`,
       validateRequest({ body: userInsertSchema }),
