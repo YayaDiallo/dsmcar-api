@@ -1,5 +1,6 @@
 import { Unauthenticated } from '@/errors/unauthenticated.js';
 import { jwtService } from '@/libs/jwt.js';
+import { redisService } from '@/libs/redis.js';
 import { Request, Response, NextFunction } from 'express';
 
 async function auth(request: Request, response: Response, next: NextFunction) {
@@ -11,14 +12,24 @@ async function auth(request: Request, response: Response, next: NextFunction) {
       statusCode: 401,
     });
   }
+
   try {
     await jwtService.verifyToken(accessToken);
+    request.token = accessToken;
   } catch (error: unknown) {
     throw new Unauthenticated({
       message: 'Invalid access token',
       statusCode: 401,
     });
   }
+  const isBlacklisted = await redisService.isTokenBlacklisted(accessToken);
+  if (isBlacklisted) {
+    throw new Unauthenticated({
+      message: 'Access token is blacklisted',
+      statusCode: 401,
+    });
+  }
+
   next();
 }
 
