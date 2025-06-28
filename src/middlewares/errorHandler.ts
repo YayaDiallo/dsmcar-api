@@ -9,7 +9,7 @@ export const errorHandler = (
   response: Response,
   next: NextFunction,
 ) => {
-  if (response.headersSent || env.DEBUG_MODE) {
+  if (response.headersSent || !env.DEBUG_MODE) {
     next(error);
     return;
   }
