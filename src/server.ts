@@ -1,5 +1,5 @@
 import { redisService } from '@/libs/redis.js';
-import { assertAuthenticated, errorHandler } from '@/middlewares/index.js';
+import { errorHandler } from '@/middlewares/index.js';
 import {
   aboutRouter,
   activityRouter,
@@ -33,10 +33,10 @@ export class Server {
     this.app.use('/api', aboutRouter);
     this.app.use('/api', activityRouter);
     this.app.use('/api', authRouter);
-    this.app.use('/api', assertAuthenticated, carRouter);
-    this.app.use('/api', assertAuthenticated, categoryRouter);
-    this.app.use('/api', assertAuthenticated, goalRouter);
-    this.app.use('/api', assertAuthenticated, transactionRouter);
+    this.app.use('/api', carRouter);
+    this.app.use('/api', categoryRouter);
+    this.app.use('/api', goalRouter);
+    this.app.use('/api', transactionRouter);
     this.app.use('/api', userRouter);
   }
 
