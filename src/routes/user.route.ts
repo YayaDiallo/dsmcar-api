@@ -27,10 +27,15 @@ class UserRouter extends BaseRoute<typeof userController> {
     );
     this.router.patch(
       `${this.path}/:id`,
+      assertAuthenticated,
       validateRequest({ params: ParamsWithId, body: userUpdateSchema }),
       this.bindController('update'),
     );
-    this.router.delete(`${this.path}/:id`, this.bindController('delete'));
+    this.router.delete(
+      `${this.path}/:id`,
+      assertAuthenticated,
+      this.bindController('delete'),
+    );
   }
 }
 
