@@ -1,9 +1,10 @@
+import env from '@/env.js';
 import { createClient } from 'redis';
 
 class RedisService {
   private client: ReturnType<typeof createClient>;
   constructor() {
-    this.client = createClient({ url: process.env.REDIS_URL });
+    this.client = createClient({ url: env.REDIS_URL });
   }
 
   connect() {

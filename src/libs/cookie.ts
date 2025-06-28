@@ -1,4 +1,5 @@
 import { authConfig } from '@/config/auth.config.js';
+import env from '@/env.js';
 import { jwtService } from '@/libs/index.js';
 import { Response } from 'express';
 
@@ -14,7 +15,7 @@ class CookieService {
     );
     const cookieOptions = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: env.NODE_ENV === 'production',
       signed: true,
       maxAge: threeMonths,
     };

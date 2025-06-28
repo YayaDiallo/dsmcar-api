@@ -1,3 +1,5 @@
+import env from '@/env.js';
+
 export const redisConfig = {
-  url: process.env.REDIS_URL,
+  url: env.REDIS_URL,
 };

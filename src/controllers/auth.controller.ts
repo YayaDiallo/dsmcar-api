@@ -35,7 +35,7 @@ class AuthController extends BaseController<typeof authService> {
     // TODO: blackList the token
     response.clearCookie('accessToken', {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+        secure: env.NODE_ENV === 'production',
       signed: true,
     });
     response.status(204).send();
