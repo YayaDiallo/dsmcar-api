@@ -21,6 +21,7 @@ const EnvSchema = z.object({
   DATABASE_URL: z.string(),
   DSMCAR_CLIENT_URL: z.string(),
   REDIS_URL: z.string(),
+  COOKIE_SECRET: z.string(),
   JWT_LIFE_TIME: z.string(),
   JWT_SECRET: z.string(),
 });

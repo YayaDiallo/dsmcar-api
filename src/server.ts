@@ -1,3 +1,4 @@
+import { appConfig, authConfig } from '@/config/index.js';
 import { redisService } from '@/libs/redis.js';
 import { errorHandler } from '@/middlewares/index.js';
 import {
@@ -31,8 +32,7 @@ export class Server {
       }),
     );
     this.app.use(express.json());
-    // TODO: Use a more secure secret key
-    this.app.use(cookieParser('signed_secret_key'));
+    this.app.use(cookieParser(authConfig.cookieSecret));
   }
 
   private initializeRoutes(): void {
