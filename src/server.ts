@@ -11,6 +11,7 @@ import {
   userRouter,
 } from '@/routes/index.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import express, { Application, ErrorRequestHandler } from 'express';
 
 export class Server {
@@ -24,6 +25,11 @@ export class Server {
   }
 
   private initializeMiddlewares(): void {
+    this.app.use(
+      cors({
+        origin: appConfig.origins,
+      }),
+    );
     this.app.use(express.json());
     // TODO: Use a more secure secret key
     this.app.use(cookieParser('signed_secret_key'));
