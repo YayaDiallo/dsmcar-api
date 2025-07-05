@@ -11,7 +11,7 @@ class RedisService {
         console.error('Redis Client Error', error);
       })
       .on('connect', () => {
-        console.log('Redis client connected successfully');
+        console.log(`Redis client connected successfully on ${env.REDIS_URL}`);
       })
       .connect();
   }
