@@ -1,7 +1,6 @@
 import { Unauthenticated } from '@/errors/unauthenticated.js';
-import { jwtService } from '@/libs/jwt.js';
-import { redisService } from '@/libs/redis.js';
-import { Request, Response, NextFunction } from 'express';
+import { jwtService, redisService } from '@/libs/index.js';
+import { NextFunction, Request, Response } from 'express';
 
 async function auth(request: Request, response: Response, next: NextFunction) {
   const accessToken = request.signedCookies.accessToken as string | undefined;
