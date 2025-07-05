@@ -1,5 +1,4 @@
 import { appConfig, authConfig } from '@/config/index.js';
-import { redisService } from '@/libs/redis.js';
 import { errorHandler } from '@/middlewares/index.js';
 import {
   aboutRouter,
@@ -47,7 +46,6 @@ export class Server {
   }
 
   start(port: number): void {
-    redisService.connect();
     this.app.listen(port, () => {
       console.log(`Server is running on http://localhost:${port}`);
     });

@@ -2,30 +2,31 @@ import env from '@/env.js';
 import { createClient } from 'redis';
 
 class RedisService {
-  private client: ReturnType<typeof createClient>;
-  constructor() {
-    this.client = createClient({ url: env.REDIS_URL });
-  }
+  private static client: ReturnType<typeof createClient>;
 
-  connect() {
+  static {
+    this.client = createClient({ url: env.REDIS_URL });
     this.client
-      .on('error', (err) => {
-        console.error('Redis Client Error', err);
+      .on('error', (error) => {
+        console.error('Redis Client Error', error);
+      })
+      .on('connect', () => {
+        console.log('Redis client connected successfully');
       })
       .connect();
   }
 
   setCache(key: string, value: string, ttl: number) {
-    return this.client.set(key, value, {
+    return RedisService.client.set(key, value, {
       EX: ttl,
       NX: true, // Only set if the key does not already exist
     });
   }
   getCache(key: string) {
-    return this.client.get(key);
+    return RedisService.client.get(key);
   }
   deleteCache(key: string) {
-    return this.client.del(key);
+    return RedisService.client.del(key);
   }
 
   blacklistToken(token: string, ttl: number) {
